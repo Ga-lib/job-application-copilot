@@ -1,0 +1,16 @@
+# Secrets
+.env
+
+# Your personal CV files (keep private)
+data/cv_samples/*
+!data/cv_samples/.gitkeep
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Editors / OS
+.vscode/
+.DS_Store

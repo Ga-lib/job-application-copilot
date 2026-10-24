@@ -1,0 +1,6 @@
+Junior Machine Learning Engineer - Dhaka (Hybrid)
+We are looking for a junior ML engineer to build and deploy NLP and LLM features.
+Responsibilities: build RAG pipelines, fine-tune models, create REST APIs, write tests.
+Requirements: Python, PyTorch or TensorFlow, SQL, Git, REST APIs (FastAPI or Flask).
+Nice to have: Docker, AWS, LangChain, experience with vector databases.
+0-2 years of experience. Bachelor's in CSE or related field.
