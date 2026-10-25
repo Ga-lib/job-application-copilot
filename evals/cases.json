@@ -1,0 +1,167 @@
+{
+  "cvs": {
+    "ml_strong": {
+      "skills": [
+        "Python",
+        "PyTorch",
+        "scikit-learn",
+        "SQL",
+        "Git",
+        "FastAPI",
+        "Docker",
+        "AWS"
+      ],
+      "text": "Alex Rahman\nalex.rahman@example.com | Dhaka, Bangladesh\n\nSUMMARY\nMachine learning engineer with 1.5 years of freelance experience building NLP and computer vision models.\n\nSKILLS\nPython, PyTorch, scikit-learn, SQL, Git, FastAPI, Docker, AWS (S3, Lambda)\n\nEXPERIENCE\nFreelance ML Engineer (2024-2026): Built a text classifier reaching 91% accuracy and deployed it as a FastAPI service in a Docker container on AWS Lambda. Wrote SQL queries to prepare training data for 3 client projects.\n\nPROJECTS\nDocRAG: question answering over PDFs using embeddings and a vector store.\nImage detector: PyTorch object detection model served through an API.\n\nEDUCATION\nB.Sc. in Computer Science and Engineering, North South University, 2026"
+    },
+    "web_dev": {
+      "skills": [
+        "JavaScript",
+        "React",
+        "Node.js",
+        "Express",
+        "SQL",
+        "Git",
+        "HTML",
+        "CSS"
+      ],
+      "text": "Sara Khan\nsara.khan@example.com | Dhaka, Bangladesh\n\nSUMMARY\nJunior full-stack web developer with 1 year of experience building responsive web apps.\n\nSKILLS\nJavaScript, React, Node.js, Express, SQL, Git, HTML, CSS\n\nEXPERIENCE\nJunior Web Developer (2025-2026): Built a React dashboard used by 40 staff members and a Node.js REST API backed by an SQL database.\n\nPROJECTS\nOnline bookstore: React frontend, Express backend, SQL database.\nPortfolio website: HTML, CSS and JavaScript.\n\nEDUCATION\nB.Sc. in Computer Science, 2025"
+    },
+    "student_basic": {
+      "skills": [
+        "Python",
+        "HTML",
+        "Excel"
+      ],
+      "text": "Rafi Ahmed\nrafi.ahmed@example.com | Dhaka, Bangladesh\n\nSUMMARY\nFinal-year student interested in data and programming.\n\nSKILLS\nPython (basics), HTML, Excel\n\nPROJECTS\nClass project: wrote a Python script to calculate student grades.\nBuilt a simple personal web page with HTML.\nUsed Excel to track monthly expenses with formulas and charts.\n\nEDUCATION\nB.Sc. in Business Studies, expected 2027"
+    }
+  },
+  "jobs": {
+    "ml_junior": {
+      "must_have": [
+        "Python",
+        "PyTorch or TensorFlow",
+        "SQL",
+        "Git",
+        "FastAPI or Flask"
+      ],
+      "text": "Junior Machine Learning Engineer at Acme AI (Dhaka, hybrid)\nWe build NLP and computer vision products for local businesses.\nResponsibilities: train and evaluate models, build REST APIs, deploy models, write tests.\nRequirements: Python, PyTorch or TensorFlow, SQL, Git, FastAPI or Flask.\nNice to have: Docker, AWS.\n0-2 years of experience."
+    },
+    "fullstack_junior": {
+      "must_have": [
+        "JavaScript",
+        "React",
+        "Node.js",
+        "SQL",
+        "Git"
+      ],
+      "text": "Junior Full-Stack Developer at Brightly (Dhaka)\nBuild features for a customer-facing web app.\nResponsibilities: build UI components, write REST endpoints, fix bugs, write tests.\nRequirements: JavaScript, React, Node.js, SQL, Git.\nNice to have: TypeScript, Docker.\n0-2 years of experience."
+    },
+    "data_analyst": {
+      "must_have": [
+        "SQL",
+        "Excel",
+        "Python",
+        "Data visualization"
+      ],
+      "text": "Data Analyst at Metrix Retail (Dhaka)\nResponsibilities: clean data, build weekly dashboards, report insights to managers.\nRequirements: SQL, Excel, Python, data visualization.\nNice to have: Power BI or Tableau.\n0-2 years of experience."
+    }
+  },
+  "cases": [
+    {
+      "id": "strong_ml_vs_ml_job",
+      "cv": "ml_strong",
+      "job": "ml_junior",
+      "expect": {
+        "min_score": 70,
+        "max_score": 100,
+        "letter": true,
+        "missing_must_have": []
+      }
+    },
+    {
+      "id": "strong_ml_vs_analyst_job",
+      "cv": "ml_strong",
+      "job": "data_analyst",
+      "expect": {
+        "min_score": 35,
+        "max_score": 85,
+        "letter": true,
+        "missing_must_have": [
+          "Excel",
+          "Data visualization"
+        ]
+      }
+    },
+    {
+      "id": "webdev_vs_fullstack_job",
+      "cv": "web_dev",
+      "job": "fullstack_junior",
+      "expect": {
+        "min_score": 70,
+        "max_score": 100,
+        "letter": true,
+        "missing_must_have": []
+      }
+    },
+    {
+      "id": "webdev_vs_ml_job",
+      "cv": "web_dev",
+      "job": "ml_junior",
+      "expect": {
+        "min_score": 0,
+        "max_score": 40,
+        "letter": null,
+        "missing_must_have": [
+          "Python",
+          "PyTorch or TensorFlow",
+          "FastAPI or Flask"
+        ]
+      }
+    },
+    {
+      "id": "student_vs_ml_job",
+      "cv": "student_basic",
+      "job": "ml_junior",
+      "expect": {
+        "min_score": 0,
+        "max_score": 35,
+        "letter": false,
+        "missing_must_have": [
+          "PyTorch or TensorFlow",
+          "SQL",
+          "Git",
+          "FastAPI or Flask"
+        ]
+      }
+    },
+    {
+      "id": "student_vs_analyst_job",
+      "cv": "student_basic",
+      "job": "data_analyst",
+      "expect": {
+        "min_score": 15,
+        "max_score": 65,
+        "letter": null,
+        "missing_must_have": [
+          "SQL",
+          "Data visualization"
+        ]
+      }
+    },
+    {
+      "id": "strong_ml_vs_fullstack_job",
+      "cv": "ml_strong",
+      "job": "fullstack_junior",
+      "expect": {
+        "min_score": 15,
+        "max_score": 60,
+        "letter": null,
+        "missing_must_have": [
+          "JavaScript",
+          "React",
+          "Node.js"
+        ]
+      }
+    }
+  ]
+}

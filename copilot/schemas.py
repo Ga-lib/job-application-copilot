@@ -36,3 +36,10 @@ class CVTips(BaseModel):
 class CoverLetter(BaseModel):
     subject: str
     body: str
+
+
+class JudgeResult(BaseModel):
+    relevance: int = Field(ge=1, le=5, description="1-5: does the letter fit THIS job?")
+    honesty: int = Field(ge=1, le=5, description="1-5: 5 only if every claim is supported by the CV")
+    tone: int = Field(ge=1, le=5, description="1-5: professional, natural, not generic")
+    comment: str = Field(description="One sentence explaining the weakest point")

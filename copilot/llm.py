@@ -6,9 +6,18 @@ from typing import Type, TypeVar
 from openai import OpenAI
 from pydantic import BaseModel, ValidationError
 
-from copilot import config
+from copilot import config, tracing
 
 T = TypeVar("T", bound=BaseModel)
+
+# Some models emit special invisible/non-breaking characters. Replace them with plain ones.
+_CLEAN = str.maketrans(
+    {"\u2011": "-", "\u2010": "-", "\u202f": " ", "\u00a0": " ", "\u2009": " ", "\u200b": None}
+)
+
+
+def clean_text(text: str) -> str:
+    return text.translate(_CLEAN)
 
 
 def get_client() -> OpenAI:
@@ -20,22 +29,33 @@ def get_client() -> OpenAI:
     return OpenAI(base_url=cfg["base_url"], api_key=api_key)
 
 
-def chat(messages: list[dict], temperature: float = 0.2,
-         json_mode: bool = False, retries: int = 3) -> str:
-    """Send a chat request. Retries with backoff (free tiers have rate limits)."""
+def chat(messages: list[dict], temperature: float = 0.2, json_mode: bool = False,
+         retries: int = 4, max_tokens: int = 4096) -> str:
+    """Send a chat request. Retries with backoff (free tiers have rate limits) and traces each call."""
     client = get_client()
-    kwargs = {"model": config.LLM_MODEL, "messages": messages, "temperature": temperature}
+    kwargs = {
+        "model": config.LLM_MODEL,
+        "messages": messages,
+        "temperature": temperature,
+        "max_tokens": max_tokens,  # reasoning models spend tokens "thinking", so keep this generous
+    }
     if json_mode:
         kwargs["response_format"] = {"type": "json_object"}
 
     for attempt in range(retries):
+        start = time.perf_counter()
         try:
             response = client.chat.completions.create(**kwargs)
-            return response.choices[0].message.content
+            content = clean_text(response.choices[0].message.content or "")
+            tracing.log_call(config.LLM_PROVIDER, config.LLM_MODEL,
+                             time.perf_counter() - start, getattr(response, "usage", None))
+            return content
         except Exception as e:
+            tracing.log_call(config.LLM_PROVIDER, config.LLM_MODEL,
+                             time.perf_counter() - start, ok=False, error=str(e))
             if attempt == retries - 1:
                 raise
-            wait = 2 ** (attempt + 1)
+            wait = 3 * 2 ** attempt
             print(f"[llm] error: {e}. Retrying in {wait}s...")
             time.sleep(wait)
 
