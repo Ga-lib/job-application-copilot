@@ -3,7 +3,7 @@ import os
 import streamlit as st
 
 from copilot.cv_parser import read_cv_bytes
-from copilot.graph import MIN_FIT_SCORE, run_agent
+from copilot.graph import MIN_FIT_SCORE, MIN_MUST_HAVE_COVERAGE, run_agent
 from copilot.report import format_report
 
 MAX_RUNS = int(os.getenv("MAX_RUNS_PER_SESSION", "5"))  # protects the free API quota
@@ -76,8 +76,8 @@ def render_results(state) -> None:
             st.caption("Always read it and fix anything that is not true for you.")
         else:
             st.info(
-                f"Skipped: the match score is below {MIN_FIT_SCORE}, so a letter would be misleading. "
-                "Work on the gaps first."
+                f"Skipped: the match score is below {MIN_FIT_SCORE} or fewer than {MIN_MUST_HAVE_COVERAGE}% "
+                "of the must-have skills are covered, so a letter would be misleading. Work on the gaps first."
             )
 
     with t_report:

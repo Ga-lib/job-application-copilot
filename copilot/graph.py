@@ -3,7 +3,8 @@
 parse_cv -> analyze_job -> research_company -> score_match -> cv_tips -> (cover_letter | END)
 
 The last step is a conditional edge: if the candidate is a very weak fit, the agent
-skips the cover letter and says so instead of writing a misleading one.
+skips the cover letter and says so instead of writing a misleading one. It also skips it when
+less than half of the job's must-have skills are covered (found by the evaluation suite).
 """
 import json
 from typing import TypedDict
@@ -15,7 +16,8 @@ from copilot.llm import chat_structured
 from copilot.schemas import CoverLetter, CVProfile, CVTips, JobRequirements, MatchResult
 from copilot.tools import skill_overlap, web_search_company
 
-MIN_FIT_SCORE = 35  # below this, no cover letter is written
+MIN_FIT_SCORE = 35  # below this score, no cover letter is written
+MIN_MUST_HAVE_COVERAGE = 50  # ...and also none if fewer than this % of must-have skills are covered
 
 
 class AgentState(TypedDict, total=False):
@@ -119,9 +121,13 @@ def node_cover_letter(state: AgentState) -> dict:
 
 
 def route_after_tips(state: AgentState) -> str:
-    if state["match"].overall_score >= MIN_FIT_SCORE:
-        return "cover_letter"
-    return "skip"
+    if state["match"].overall_score < MIN_FIT_SCORE:
+        return "skip"
+    must = state["overlap"]["must_have"]
+    total = len(must["matched"]) + len(must["missing"])
+    if total and must["coverage_pct"] < MIN_MUST_HAVE_COVERAGE:
+        return "skip"  # the job needs skills the candidate mostly lacks: a letter would not help
+    return "cover_letter"
 
 
 # ---------- graph ----------

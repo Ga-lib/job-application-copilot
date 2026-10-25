@@ -155,7 +155,7 @@
       "expect": {
         "min_score": 15,
         "max_score": 60,
-        "letter": null,
+        "letter": false,
         "missing_must_have": [
           "JavaScript",
           "React",

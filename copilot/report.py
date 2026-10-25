@@ -1,4 +1,4 @@
-from copilot.graph import MIN_FIT_SCORE, AgentState
+from copilot.graph import MIN_FIT_SCORE, MIN_MUST_HAVE_COVERAGE, AgentState
 
 
 def _bullets(items: list[str]) -> str:
@@ -32,7 +32,8 @@ def format_report(state: AgentState) -> str:
         parts.append(f"\n## Cover letter\n**Subject:** {letter.subject}\n\n{letter.body}")
     else:
         parts.append(
-            f"\n## Cover letter\nSkipped: the match score is below {MIN_FIT_SCORE}, "
-            "so a letter would be misleading. Work on the gaps above first."
+            f"\n## Cover letter\nSkipped: the match score is below {MIN_FIT_SCORE} or fewer than "
+            f"{MIN_MUST_HAVE_COVERAGE}% of the must-have skills are covered, so a letter would be "
+            "misleading. Work on the gaps above first."
         )
     return "\n".join(parts) + "\n"
