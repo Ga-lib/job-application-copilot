@@ -20,6 +20,4 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run tests (no API key needed, the LLM is simulated)
-        env:
-          TRACING: "0"
         run: python -m pytest -q
