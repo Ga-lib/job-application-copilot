@@ -5,7 +5,7 @@
 An LLM agent that reads your CV and a job description, then returns a **match score**, **CV improvement tips**
 and a **tailored cover letter**. It runs entirely on free tools (Groq or Gemini free tiers, or local Ollama).
 
-**Live demo:** https://YOUR-APP-NAME.streamlit.app *(replace with your link)*
+**Live demo:** https://job-application-copilot-sf86ffmrusr7uusoctmbn2.streamlit.app/
 
 <!-- Add a screenshot or GIF here: ![demo](docs/demo.gif) -->
 
