@@ -17,7 +17,7 @@ parse_cv -> analyze_job -> research_company (web search) -> score_match
 - **Provider-agnostic**: switch between Groq, Gemini and Ollama with one environment variable.
 
 ## Live demo
-> Add your deployed link here: `https://YOUR-APP-NAME.streamlit.app`
+> Add your deployed link here: https://job-application-copilot-sf86ffmrusr7uusoctmbn2.streamlit.app/
 
 ## Run the web app locally
 
