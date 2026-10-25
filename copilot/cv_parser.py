@@ -23,3 +23,18 @@ def read_cv(path: str) -> str:
     if not text:
         raise ValueError("No text found. If the PDF is a scanned image, use a text-based PDF.")
     return text
+
+
+def read_cv_bytes(data: bytes, filename: str) -> str:
+    """Read a CV from uploaded bytes (used by the web app)."""
+    suffix = Path(filename).suffix.lower()
+    if suffix == ".pdf":
+        with pymupdf.open(stream=data, filetype="pdf") as doc:
+            text = "\n".join(page.get_text() for page in doc).strip()
+    elif suffix in {".txt", ".md"}:
+        text = data.decode("utf-8", errors="ignore").strip()
+    else:
+        raise ValueError(f"Unsupported file type: {suffix or 'unknown'}")
+    if not text:
+        raise ValueError("No text found. If the PDF is a scanned image, paste the text instead.")
+    return text

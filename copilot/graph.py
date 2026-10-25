@@ -145,8 +145,11 @@ def build_graph():
     return g.compile()
 
 
-def run_agent(cv_text: str, job_text: str, verbose: bool = False) -> AgentState:
-    """Run the whole workflow and return the final state."""
+def run_agent(cv_text: str, job_text: str, verbose: bool = False, on_step=None) -> AgentState:
+    """Run the whole workflow and return the final state.
+
+    on_step(node_name, state) is called after each step (the web app uses it for live progress).
+    """
     app = build_graph()
     state: AgentState = {"cv_text": cv_text, "job_text": job_text, "cover_letter": None}
     for chunk in app.stream(state, stream_mode="updates"):
@@ -154,4 +157,6 @@ def run_agent(cv_text: str, job_text: str, verbose: bool = False) -> AgentState:
             state.update(update)
             if verbose:
                 print(f"  done: {node_name}")
+            if on_step:
+                on_step(node_name, state)
     return state

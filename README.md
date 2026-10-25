@@ -16,6 +16,19 @@ parse_cv -> analyze_job -> research_company (web search) -> score_match
 - **Rule-based skill matching** gives the LLM hard evidence, so the score is not just vibes.
 - **Provider-agnostic**: switch between Groq, Gemini and Ollama with one environment variable.
 
+## Live demo
+> Add your deployed link here: `https://YOUR-APP-NAME.streamlit.app`
+
+## Run the web app locally
+
+```bash
+streamlit run app.py
+```
+
+Open http://localhost:8501, add your CV (PDF/TXT or pasted text), paste a job description and click **Analyze**.
+The demo is limited to a few runs per session to protect the free API quota.
+Your CV is sent to the LLM provider to produce the result and is not saved by the app.
+
 ## Quick start
 
 ```bash
@@ -55,5 +68,5 @@ Run `python scripts/list_models.py` to see which model names your account can us
 - [x] Step 1: LLM layer, CV parsing, structured extraction
 - [x] Step 2: agent workflow (LangGraph), tools, report
 - [x] Step 3: evaluation suite and tracing
-- [ ] Step 4: Streamlit UI and deploy
+- [x] Step 4: Streamlit UI and deploy
 - [ ] Step 5: Docker, CI, demo video
